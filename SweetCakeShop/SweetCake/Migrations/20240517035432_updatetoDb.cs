@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SweetCake.Migrations
 {
     /// <inheritdoc />
-    public partial class updateToDB : Migration
+    public partial class updatetoDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,19 +26,24 @@ namespace SweetCake.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "THONGTIN_NHANHANG",
+                name: "TAI_KHOAN",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TenTK = table.Column<string>(type: "Varchar(50)", nullable: false),
+                    MatKhau = table.Column<string>(type: "Varchar(60)", nullable: false),
+                    SDT = table.Column<string>(type: "Varchar(11)", nullable: false),
+                    Email = table.Column<string>(type: "Varchar(30)", nullable: false),
+                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayDangKy = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LoaiTK = table.Column<bool>(type: "bit", nullable: false),
+                    TrangThai = table.Column<bool>(type: "bit", nullable: false),
+                    ThongTin_NhanHangId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_THONGTIN_NHANHANG", x => x.Id);
+                    table.PrimaryKey("PK_TAI_KHOAN", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,8 +55,7 @@ namespace SweetCake.Migrations
                     Ten = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Mota = table.Column<string>(type: "ntext", nullable: true),
                     TrangThai = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    LoaiSPId = table.Column<int>(type: "int", nullable: false),
-                    ThongTin_NhanHangId = table.Column<int>(type: "int", nullable: true)
+                    LoaiSPId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,10 +66,28 @@ namespace SweetCake.Migrations
                         principalTable: "LOAI_SP",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "THONGTIN_NHANHANG",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SanPhamId = table.Column<int>(type: "int", nullable: false),
+                    TaiKhoanId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_THONGTIN_NHANHANG", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SAN_PHAM_THONGTIN_NHANHANG_ThongTin_NhanHangId",
-                        column: x => x.ThongTin_NhanHangId,
-                        principalTable: "THONGTIN_NHANHANG",
+                        name: "FK_THONGTIN_NHANHANG_TAI_KHOAN_TaiKhoanId",
+                        column: x => x.TaiKhoanId,
+                        principalTable: "TAI_KHOAN",
                         principalColumn: "Id");
                 });
 
@@ -129,9 +151,9 @@ namespace SweetCake.Migrations
                 column: "LoaiSPId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SAN_PHAM_ThongTin_NhanHangId",
-                table: "SAN_PHAM",
-                column: "ThongTin_NhanHangId");
+                name: "IX_THONGTIN_NHANHANG_TaiKhoanId",
+                table: "THONGTIN_NHANHANG",
+                column: "TaiKhoanId");
         }
 
         /// <inheritdoc />
@@ -144,13 +166,16 @@ namespace SweetCake.Migrations
                 name: "CHI_TIET_SP");
 
             migrationBuilder.DropTable(
+                name: "THONGTIN_NHANHANG");
+
+            migrationBuilder.DropTable(
                 name: "SAN_PHAM");
 
             migrationBuilder.DropTable(
-                name: "LOAI_SP");
+                name: "TAI_KHOAN");
 
             migrationBuilder.DropTable(
-                name: "THONGTIN_NHANHANG");
+                name: "LOAI_SP");
         }
     }
 }

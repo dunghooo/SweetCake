@@ -34,6 +34,8 @@ namespace SweetCake.Models
         public bool LoaiTK { get; set; }
         [Display(Name = "Trạng thái")]
         public bool TrangThai { get; set; }
-        public ICollection<SanPham>? sanPhams { get; set; }
+        [ForeignKey("ThongTin_NhanHang")]
+        public int ThongTin_NhanHangId{ get; set; }
+        public ICollection<ThongTin_NhanHang>? thongTin_NhanHangs { get; set; }
     }
 }

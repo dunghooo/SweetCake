@@ -12,8 +12,8 @@ using SweetCake.Data;
 namespace SweetCake.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240514033627_updateToDB")]
-    partial class updateToDB
+    [Migration("20240517035432_updatetoDb")]
+    partial class updatetoDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,9 +118,6 @@ namespace SweetCake.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ThongTin_NhanHangId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TrangThai")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
@@ -129,9 +126,51 @@ namespace SweetCake.Migrations
 
                     b.HasIndex("LoaiSPId");
 
-                    b.HasIndex("ThongTin_NhanHangId");
-
                     b.ToTable("SAN_PHAM");
+                });
+
+            modelBuilder.Entity("SweetCake.Models.TaiKhoan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("Varchar(30)");
+
+                    b.Property<bool>("LoaiTK")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MatKhau")
+                        .IsRequired()
+                        .HasColumnType("Varchar(60)");
+
+                    b.Property<DateTime>("NgayDangKy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SDT")
+                        .IsRequired()
+                        .HasColumnType("Varchar(11)");
+
+                    b.Property<string>("TenTK")
+                        .IsRequired()
+                        .HasColumnType("Varchar(50)");
+
+                    b.Property<int>("ThongTin_NhanHangId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("TrangThai")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TAI_KHOAN");
                 });
 
             modelBuilder.Entity("SweetCake.Models.ThongTin_NhanHang", b =>
@@ -157,7 +196,15 @@ namespace SweetCake.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SanPhamId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TaiKhoanId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TaiKhoanId");
 
                     b.ToTable("THONGTIN_NHANHANG");
                 });
@@ -165,7 +212,7 @@ namespace SweetCake.Migrations
             modelBuilder.Entity("SweetCake.Models.Anh", b =>
                 {
                     b.HasOne("SweetCake.Models.SanPham", "SanPham")
-                        .WithMany()
+                        .WithMany("Anhs")
                         .HasForeignKey("SanphamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -176,7 +223,7 @@ namespace SweetCake.Migrations
             modelBuilder.Entity("SweetCake.Models.ChiTiet_SP", b =>
                 {
                     b.HasOne("SweetCake.Models.SanPham", "SanPham")
-                        .WithMany()
+                        .WithMany("ChiTietSPs")
                         .HasForeignKey("SanPhamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -186,15 +233,20 @@ namespace SweetCake.Migrations
 
             modelBuilder.Entity("SweetCake.Models.SanPham", b =>
                 {
-                    b.HasOne("SweetCake.Models.LoaiSP", null)
+                    b.HasOne("SweetCake.Models.LoaiSP", "LoaiSP")
                         .WithMany("SanPhams")
                         .HasForeignKey("LoaiSPId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SweetCake.Models.ThongTin_NhanHang", null)
-                        .WithMany("SanPhams")
-                        .HasForeignKey("ThongTin_NhanHangId");
+                    b.Navigation("LoaiSP");
+                });
+
+            modelBuilder.Entity("SweetCake.Models.ThongTin_NhanHang", b =>
+                {
+                    b.HasOne("SweetCake.Models.TaiKhoan", null)
+                        .WithMany("thongTin_NhanHangs")
+                        .HasForeignKey("TaiKhoanId");
                 });
 
             modelBuilder.Entity("SweetCake.Models.LoaiSP", b =>
@@ -202,9 +254,16 @@ namespace SweetCake.Migrations
                     b.Navigation("SanPhams");
                 });
 
-            modelBuilder.Entity("SweetCake.Models.ThongTin_NhanHang", b =>
+            modelBuilder.Entity("SweetCake.Models.SanPham", b =>
                 {
-                    b.Navigation("SanPhams");
+                    b.Navigation("Anhs");
+
+                    b.Navigation("ChiTietSPs");
+                });
+
+            modelBuilder.Entity("SweetCake.Models.TaiKhoan", b =>
+                {
+                    b.Navigation("thongTin_NhanHangs");
                 });
 #pragma warning restore 612, 618
         }
