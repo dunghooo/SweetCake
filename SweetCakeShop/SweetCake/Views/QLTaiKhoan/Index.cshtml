@@ -110,9 +110,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.TrangThai)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ThongTin_NhanHangId)
-                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -165,14 +162,12 @@
                                 }
                             </td>
                             <td>
-                                @item.ThongTin_NhanHangId;
-                            </td>
-                            <td>
                                 <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
                                 <button type="button" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-id="@item.Id" onclick="setId(this)">
                                     <i class="bi bi-trash3"></i>
                                 </button>
                             </td>
+                            
                         </tr>
                     }
                 }
@@ -180,7 +175,10 @@
         </table>
     </div>
 </div>
+<script>
+    function setId(element) {
+        var id = element.getAttribute("data-id");
+        document.getElementById("txt_ID").value = id;
+    }
+</script>
 <partial name="_Paging" model="pagingmodel" />
-
-
-

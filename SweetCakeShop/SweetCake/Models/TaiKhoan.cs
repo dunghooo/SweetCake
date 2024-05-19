@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SweetCake.Models;
 
 namespace SweetCake.Models
 {
@@ -35,7 +36,7 @@ namespace SweetCake.Models
         [Display(Name = "Trạng thái")]
         public bool TrangThai { get; set; }
         [ForeignKey("ThongTin_NhanHang")]
-        public int ThongTin_NhanHangId{ get; set; }
-        public ICollection<ThongTin_NhanHang>? thongTin_NhanHangs { get; set; }
-    }
+        [Display(Name = "Mã nhận hàng")]
+		public ICollection<DonHang>? DonHangs { get; set; }
+	}
 }

@@ -12,8 +12,8 @@ using SweetCake.Data;
 namespace SweetCake.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240517035432_updatetoDb")]
-    partial class updatetoDb
+    [Migration("20240518040750_addAllToDb")]
+    partial class addAllToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,36 @@ namespace SweetCake.Migrations
                     b.HasIndex("SanPhamId");
 
                     b.ToTable("CHI_TIET_SP");
+                });
+
+            modelBuilder.Entity("SweetCake.Models.DonHang", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("TaiKhoanId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ThoiGianHuy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ThoiGianTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TrangThaiDonHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("TrangThaiThanhToan")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaiKhoanId");
+
+                    b.ToTable("DON_HANG");
                 });
 
             modelBuilder.Entity("SweetCake.Models.LoaiSP", b =>
@@ -162,51 +192,12 @@ namespace SweetCake.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(50)");
 
-                    b.Property<int>("ThongTin_NhanHangId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TrangThai")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.ToTable("TAI_KHOAN");
-                });
-
-            modelBuilder.Entity("SweetCake.Models.ThongTin_NhanHang", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DiaChi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GhiChu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HoTen")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SDT")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SanPhamId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TaiKhoanId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TaiKhoanId");
-
-                    b.ToTable("THONGTIN_NHANHANG");
                 });
 
             modelBuilder.Entity("SweetCake.Models.Anh", b =>
@@ -231,6 +222,17 @@ namespace SweetCake.Migrations
                     b.Navigation("SanPham");
                 });
 
+            modelBuilder.Entity("SweetCake.Models.DonHang", b =>
+                {
+                    b.HasOne("SweetCake.Models.TaiKhoan", "TaiKhoan")
+                        .WithMany("DonHangs")
+                        .HasForeignKey("TaiKhoanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TaiKhoan");
+                });
+
             modelBuilder.Entity("SweetCake.Models.SanPham", b =>
                 {
                     b.HasOne("SweetCake.Models.LoaiSP", "LoaiSP")
@@ -240,13 +242,6 @@ namespace SweetCake.Migrations
                         .IsRequired();
 
                     b.Navigation("LoaiSP");
-                });
-
-            modelBuilder.Entity("SweetCake.Models.ThongTin_NhanHang", b =>
-                {
-                    b.HasOne("SweetCake.Models.TaiKhoan", null)
-                        .WithMany("thongTin_NhanHangs")
-                        .HasForeignKey("TaiKhoanId");
                 });
 
             modelBuilder.Entity("SweetCake.Models.LoaiSP", b =>
@@ -263,7 +258,7 @@ namespace SweetCake.Migrations
 
             modelBuilder.Entity("SweetCake.Models.TaiKhoan", b =>
                 {
-                    b.Navigation("thongTin_NhanHangs");
+                    b.Navigation("DonHangs");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SweetCake.Migrations
 {
     /// <inheritdoc />
-    public partial class updatetoDb : Migration
+    public partial class addAllToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,8 +38,7 @@ namespace SweetCake.Migrations
                     DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayDangKy = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoaiTK = table.Column<bool>(type: "bit", nullable: false),
-                    TrangThai = table.Column<bool>(type: "bit", nullable: false),
-                    ThongTin_NhanHangId = table.Column<int>(type: "int", nullable: false)
+                    TrangThai = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,26 +68,26 @@ namespace SweetCake.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "THONGTIN_NHANHANG",
+                name: "DON_HANG",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SanPhamId = table.Column<int>(type: "int", nullable: false),
-                    TaiKhoanId = table.Column<int>(type: "int", nullable: true)
+                    ThoiGianTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ThoiGianHuy = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TrangThaiThanhToan = table.Column<bool>(type: "bit", nullable: true),
+                    TrangThaiDonHang = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaiKhoanId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_THONGTIN_NHANHANG", x => x.Id);
+                    table.PrimaryKey("PK_DON_HANG", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_THONGTIN_NHANHANG_TAI_KHOAN_TaiKhoanId",
+                        name: "FK_DON_HANG_TAI_KHOAN_TaiKhoanId",
                         column: x => x.TaiKhoanId,
                         principalTable: "TAI_KHOAN",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,14 +145,14 @@ namespace SweetCake.Migrations
                 column: "SanPhamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DON_HANG_TaiKhoanId",
+                table: "DON_HANG",
+                column: "TaiKhoanId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SAN_PHAM_LoaiSPId",
                 table: "SAN_PHAM",
                 column: "LoaiSPId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_THONGTIN_NHANHANG_TaiKhoanId",
-                table: "THONGTIN_NHANHANG",
-                column: "TaiKhoanId");
         }
 
         /// <inheritdoc />
@@ -166,7 +165,7 @@ namespace SweetCake.Migrations
                 name: "CHI_TIET_SP");
 
             migrationBuilder.DropTable(
-                name: "THONGTIN_NHANHANG");
+                name: "DON_HANG");
 
             migrationBuilder.DropTable(
                 name: "SAN_PHAM");

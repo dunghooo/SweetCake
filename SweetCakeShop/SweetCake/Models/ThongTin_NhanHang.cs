@@ -12,8 +12,8 @@ namespace SweetCake.Models
         public string SDT { get; set; }
         public string DiaChi { get; set; }
         public string? GhiChu { get; set; }
-        [ForeignKey("SanPham")]
-        public int SanPhamId { get; set; }
+		[ForeignKey("DonHang")]
+		public int DonhangId { get; set; }
 
-    }
+	}
 }
