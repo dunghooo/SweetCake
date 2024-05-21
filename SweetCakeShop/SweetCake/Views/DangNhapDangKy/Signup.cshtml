@@ -1,7 +1,6 @@
-﻿@using SweetCake.Models;
-@model TaiKhoan
+﻿@model SweetCake.Models.TaiKhoan
 @{
-    ViewData["Title"] = "Login";
+    ViewBag.Title = "Signup";
     Layout = null;
 }
 
@@ -69,7 +68,7 @@
 
 <body style="background-image: url('https://c0.wallpaperflare.com/preview/1013/496/951/mockup-bakery-bread-pastry.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
     <!-- Content -->
-
+    <partial name="_notification" />
     <div class="container-xxl" >
         <div class="authentication-wrapper authentication-basic container-p-y" >
             <div class="authentication-inner">
@@ -84,35 +83,45 @@
                         </div>
                         <!-- /Logo -->
 
-                        <form asp-action="Login" asp-controller="DangNhapDangKy" asp-route-returnUrl="@ViewBag.ReturnUrl" method="post" class="form">
+                        <form method="post" action="~/DangNhapDangKy/Signup">
+                            @Html.AntiForgeryToken()
                             <div class="mb-3">
-                                <label for="email" class="form-label">Tên tài khoản</label>
-                                <input type="text" asp-for="TenTK" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên tài khoản của bạn">
+                                <label for="TenTK" class="form-label">Tên tài khoản</label>
+                                <input type="text" class="form-control" id="TenTK" name="TenTK" aria-describedby="textHelp" maxlength="50" placeholder="Nhập tên tài khoản">
+                                @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
                             </div>
                             <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Mật khẩu</label>
-                                    <a href="auth-forgot-password-basic.html">
-                                        <small>Quên mật khẩu?</small>
-                                    </a>
-                                </div>
+                                <label for="MatKhau" class="form-label">Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" asp-for="MatKhau" class="form-control" id="exampleInputPassword1" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7";>
-                                        
+                                    <input type="password" class="form-control" id="MatKhau" name="MatKhau" maxlength="15" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7">
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                    <span class="text-danger">@ViewBag.ErrPassword</span>
+                                
+                                
                                 </div>
+                                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
                             </div>
-                            
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Đăng nhập</button>
+                                <label for="Email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp" placeholder="nhập email">
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
+                            <div class="mb-3">
+                                <label for="SDT" class="form-label">SDT</label>
+                                <input type="text" class="form-control" id="SDT" name="SDT" maxlength="11" placeholder="nhập số điện thoại">
+                                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3">
+                                <label for="DiaChi" class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control" id="DiaChi" name="DiaChi" placeholder="nhập địa chỉ">
+                                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Đăng ký</button>
                         </form>
 
                         <p class="text-center">
-                            <span>Chưa có tài khoản?</span>
-                            <a href="~/DangNhapDangKy/Signup">
-                                <span>Tạo tài khoản</span>
+                            <span>Đã có tài khoản?</span>
+                            <a href="~/DangNhapDangKy/Login">
+                                <span>Đăng nhập</span>
                             </a>
                         </p>
                     </div>
@@ -143,4 +152,5 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
+
 

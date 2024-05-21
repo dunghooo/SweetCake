@@ -15,7 +15,15 @@ namespace SweetCake.Controllers
 
         public IActionResult Index()
         {
-            return View();
+			if (HttpContext.Session.GetString("UserName") != null)
+			{
+				ViewBag.Username = HttpContext.Session.GetString("UserName");
+			}
+			else
+			{
+				ViewBag.Username = null;
+			}
+			return View();
         }
 
         public IActionResult About()

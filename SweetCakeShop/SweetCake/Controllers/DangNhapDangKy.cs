@@ -78,5 +78,67 @@ namespace SweetCake.Controllers
             ViewBag.ErrPassword = "Tên tài khoản hoặc mật khẩu không chính xác";
             return View(tk);
         }
-    }
+
+        public ActionResult Signup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Signup(TaiKhoan tk)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var existingAccount = _db.TaiKhoan.FirstOrDefault(t => t.TenTK == tk.TenTK);
+                var existingEmail = _db.TaiKhoan.FirstOrDefault(t => t.Email == tk.Email);
+                var existingPhone = _db.TaiKhoan.FirstOrDefault(t => t.SDT == tk.SDT);
+
+
+                if (existingAccount != null)
+                {
+                    TempData["errorMessage"] = "Tài khoản đã tồn tại!";
+                    return View();
+                }
+                else if (existingEmail != null)
+                {
+                    TempData["errorMessage"] = "Email đã được sử dụng!";
+                    return View();
+                }
+                else if (existingPhone != null)
+                {
+                    TempData["errorMessage"] = "Số điện thoại đã được sử dụng!";
+                    return View();
+                }
+                else
+                {
+                    var db = new TaiKhoan()
+                    {
+                        TenTK = tk.TenTK,
+                        Email = tk.Email,
+                        MatKhau = BCrypt.Net.BCrypt.HashPassword(tk.MatKhau),
+                        SDT = tk.SDT,
+                        DiaChi = tk.DiaChi,
+                        NgayDangKy = DateTime.Now,
+                        TrangThai = true,
+                    };
+                    _db.TaiKhoan.Add(db);
+                    _db.SaveChanges();
+                    TempData["Sucess"] = "Đăng kí thành công!";
+                    return RedirectToAction("Login");
+                }
+            }
+            else
+            {
+                TempData["Error"] = "Đăng ký thất bại!";
+                return View();
+            }
+        }
+
+		public IActionResult Logout()
+		{
+			HttpContext.Session.Clear();
+			return RedirectToAction("Index", "Home");
+		}
+	}
 }

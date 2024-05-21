@@ -34,6 +34,35 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	<link rel="stylesheet" href="~//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<style>	
+		.user-menu {
+			position: relative;
+			display: inline-block;
+		}
+
+		.logout-dropdown {
+			display: none;
+			position: absolute;
+			background-color: transparent;
+			min-width: 100px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			z-index: 1;
+			width: 150px;
+		}
+
+		.user-menu:hover .logout-dropdown {
+			display: block;
+		}
+
+		.logout-dropdown a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+			
+	</style>
 </head>
 <body>
 	<partial name="_notification" />
@@ -86,7 +115,19 @@
 									<div class="header-icons">
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 										<a class="shopping-cart" href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-										<a class="shopping-cart" href="cart.html"><i class="fa-solid fa-user"></i></a>
+										<div class="user-menu">
+											@if (ViewBag.Username != null)
+											{
+												<a class="shopping-cart" href="#">@ViewBag.Username</a>
+												<div class="logout-dropdown">
+													<a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Logout"> Đăng xuất</a>
+												</div>
+											}
+											else
+											{
+												<a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Login"><i class="fa-regular fa-user"></i></a>
+											}
+										</div>
 									</div>
 								</li>
 							</ul>

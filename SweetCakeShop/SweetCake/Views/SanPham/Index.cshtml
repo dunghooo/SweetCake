@@ -1,0 +1,152 @@
+﻿@model IEnumerable<SweetCake.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var pagingmodel = new SweetCake.Helpers.PagingModel()
+            {
+                currentpage = (int)(@ViewBag.CurrentPage),
+                countpages = (int)(@ViewBag.CountPages),
+                generateUrl = (int? p) => Url.Page("", new { p = p, Key = @ViewBag.Search })
+            };
+}
+
+<style>
+    .btn-red {
+        border: solid 1px red;
+        color: red;
+    }
+
+        .btn-red:hover {
+            background-color: red;
+            color: white;
+        }
+</style>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container mt-1">
+                <div class="cancel-dndk d-flex flex-row-reverse">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Tab panes -->
+                <div class="tab-content px-5 pb-3">
+                    <div class="container tab-pane active">
+                        <form name="frm_Delete" asp-action="Delete" method="POST">
+                            <div class="mb-3">
+                                <input id="txt_ID" class="visually-hidden" type="text" name="txt_ID" />
+                            </div>
+                            <div class="mb-3 text-center">
+                                <h5>Bạn muốn xóa sản phẩm này không?</h5>
+                            </div>
+                            <div class="d-flex justify-content-evenly text-center">
+                                <button type="submit" class="btn btn-primary" style="width:100px;">
+                                    Có
+                                </button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" style="width:100px;">
+                                    Không
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container p-3">
+    <div class="row">
+        <div class="col-12">
+            <h3>
+                Quản lý sản phẩm
+            </h3>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <form class="d-flex" role="search" asp-action="Search">
+                    <input style="max-width:50%;" name="Key" value="@ViewBag.Search" class="form-control me-2" type="search" placeholder="Nhập id sản phẩm" aria-label="Tìm kiếm">
+                    <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="QLSanPham" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus"></i>Thêm mới</a>
+            </div>
+        </div>
+    </div>
+    <br />  <br />  
+    <div class="table-responsive">
+        <table class="table align-middle table-condensed table-hover text-center">
+            <thead>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Mô tả</th>
+                <th>Trạng thái</th>
+                <th>Mã loại sản phẩm</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+                <th>Sửa chi tiết sp</th>
+                <th>Hình ảnh</th>
+            </thead>
+            <tbody>
+                @if(Model != null)
+                {
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Ten</td>
+                            <td>@item.Mota</td>
+                            <td>@item.TrangThai</td>
+                            <td>@item.LoaiSPId</td>
+                            <td>
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary" asp-route-SanPhamId="@item.Id" asp-action="Index" asp-controller="ChiTietSP"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-id="@item.Id" onclick="setId(this)">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <a data-bs-toggle="collapse" href="#@item.Id" role="button" aria-expanded="false"
+                                   aria-controls="@item.Id" style="font-size: 30px"><i class="bi bi-plus-circle"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr class="collapse" id="@item.Id">
+
+                            <td colspan="10">
+                                <p style="text-align:center"><strong>Ảnh sản phẩm</strong></p>
+                                <div class="row" style="justify-content: space-between">
+                                    @if (item.Anhs != null)
+                                    {
+                                        @foreach (var img in item.Anhs)
+                                        {
+                                            <div class="col-3 ">
+                                                <img width="100%" src="~/img/products/@img.TenAnh" style="border: 3px solid gray" />
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function setId(element) {
+        var id = element.getAttribute("data-id");
+        document.getElementById("txt_ID").value = id;
+    }
+</script>
+<partial name="_Paging" model="pagingmodel" />
