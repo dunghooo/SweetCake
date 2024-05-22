@@ -84,6 +84,35 @@ namespace SweetCake.Controllers
                 ViewBag.LoaiSPid = new SelectList(loaiSPList, "Value", "Text");
                 List<string> listTrangThai = new List<string> { "Đang bán", "Ngừng bán", "Sale" };
                 ViewBag.TrangThai = new SelectList(listTrangThai);
+
+                if (gia <= 0)
+                {
+                    ViewBag.ktGia = "Giá không hợp lệ";
+
+                }
+
+                if (soluong <= 0)
+                {
+                    ViewBag.ktSoLuong = "Số lượng không hợp lệ";
+
+                }
+
+                if (ngaysanxuat >= hansudung)
+                {
+                    ViewBag.ktNgay = "Ngày sản suất phải bé hơn hạn sử dụng";
+
+                }
+                if (ngaysanxuat == DateTime.MinValue && hansudung == DateTime.MinValue)
+                {
+                    ViewBag.ktTrongNgay = "Vui lòng nhập ngày sản suất, hạn sử dụng";
+
+                }
+
+                if (ViewBag.ktGia != null || ViewBag.ktSoLuong != null || ViewBag.ktKichThuoc != null || ViewBag.ktNgay != null || ViewBag.ktTrongNgay != null)
+                {
+                    return View(sp);
+                }
+
                 if (ModelState.IsValid)
                 {
                     _db.Add(sp);

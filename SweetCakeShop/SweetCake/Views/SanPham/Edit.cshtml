@@ -1,0 +1,67 @@
+﻿@model SanPham
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container" style="width:50%">
+    <form method="post" asp-action="Edit" enctype="multipart/form-data">
+        <div class="card-body">
+
+            <div class="mb-3 mt-3">
+                <label asp-for="Ten" class="form-label">Tên</label>
+                <input asp-for="Ten" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Ten" class="text-danger"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="imageUpload" class="form-label">Chọn ảnh mới:</label>
+                <div class="row" style="justify-content: space-around">
+                    @foreach (var anh in ViewBag.DanhSachAnh)
+                    {
+                        <img src="~/img/products/@anh.TenAnh" alt="Ảnh sản phẩm" class="img-thumbnail" style="width:18%" />
+                    }
+                </div>
+                <br />
+                <input type="file" class="form-control" id="imageUpload" name="files" multiple onchange="previewFile()">
+
+            </div>
+            <div class="mb-3 mt-3">
+                <label asp-for="Mota" class="form-label">Mô tả</label>
+                <input asp-for="Mota" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Mota" class="text-danger"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <label asp-for="TrangThai" class="form-label">Trạng thái</label>
+                <select asp-for="TrangThai" class="form-control" asp-items="ViewBag.TrangThai"></select>
+                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            </div>
+            <div class=" mb-3 mt-3">
+                <label asp-for="LoaiSPId" class="form-label">Mã loại sản phẩm</label>
+                <select asp-for="LoaiSPId" class="form-control" asp-items="ViewBag.LoaiSPid"></select>
+                <span asp-validation-for="LoaiSPId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Sửa</button>
+            <a asp-controller="SanPham" asp-action="Index" class="btn btn-primary">Trở về</a>
+        </div>
+    </form>
+</div>
+
+    <script>
+        function previewFile() {
+            var preview = document.getElementById('previewImage');
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+    </script>
+
+

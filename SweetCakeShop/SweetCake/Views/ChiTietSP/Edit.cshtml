@@ -1,0 +1,49 @@
+﻿@model ChiTiet_SP
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<form method="post" asp-action="Edit" asp-route-id="@Model.SanPhamId">
+    <h4>Sửa chi tiết sản phẩm</h4>
+    <div class="container" style="width: 50%">
+        <div class="card-body">
+            <div class="mb-3 mt-3">
+                <label class="form-label">Tên sản phẩm</label>
+                <input type="text" class="form-control" value="@ViewBag.tenSP" readonly />
+            </div>
+            <div class="mb-3 mt-3">
+                <label asp-for="Gia" class="form-label">Giá </label>
+                <input asp-for="Gia" type="text" class="form-control" id="numberInput" maxlength="8">
+                <span asp-validation-for="Gia" class="text-danger"></span>
+
+
+
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label asp-for="SoLuong" class="form-label">Số lượng</label>
+                <input asp-for="SoLuong" type="text" class="form-control" id="numberInput" maxlength="4">
+                <span asp-validation-for="SoLuong" class="text-danger"></span>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3 mt-3">
+                    <label asp-for="NgaySanXuat" class="form-label">Ngày sản xuất</label>
+                    <input asp-for="NgaySanXuat" type="date" class="form-control" id="datepicker">
+                    <span asp-validation-for="NgaySanXuat" class="text-danger"></span>
+
+                </div>
+                <div class="col-md-6 mb-3 mt-3">
+                    <label asp-for="HanSuDung" class="form-label">Hạn sử dụng</label>
+                    <input asp-for="HanSuDung" type="date" class="form-control">
+                    <span asp-validation-for="HanSuDung" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Sửa</button>
+            <a asp-controller="ChiTietSP" asp-action="Index" class="btn btn-primary" asp-route-SanPhamId="@ViewBag.SanPhamId">Trở về</a>
+        </div>
+    </div>
+</form>
+

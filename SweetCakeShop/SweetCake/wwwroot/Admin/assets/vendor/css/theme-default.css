@@ -662,22 +662,22 @@ a:hover {
 .bg-menu-theme .menu-horizontal-prev:focus,
 .bg-menu-theme .menu-horizontal-next:hover,
 .bg-menu-theme .menu-horizontal-next:focus {
-  color: #566a7f;
+  color: #696cff;
 }
 .bg-menu-theme .menu-link.active,
 .bg-menu-theme .menu-horizontal-prev.active,
 .bg-menu-theme .menu-horizontal-next.active {
-  color: #566a7f;
+  color: #696cff;
 }
 .bg-menu-theme .menu-item.disabled .menu-link,
 .bg-menu-theme .menu-horizontal-prev.disabled,
 .bg-menu-theme .menu-horizontal-next.disabled {
   color: #a5afbb !important;
 }
-.bg-menu-theme .menu-item.open:not(.menu-item-closing) > .menu-toggle,
-.bg-menu-theme .menu-item.active > .menu-link {
-  color: #566a7f;
-}
+    .bg-menu-theme .menu-item.open:not(.menu-item-closing) > .menu-toggle,
+    .bg-menu-theme .menu-item.active > .menu-link {
+        color: #696cff;
+    }
 .bg-menu-theme .menu-item.active > .menu-link:not(.menu-toggle) {
   background-color: #fff;
 }
