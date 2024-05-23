@@ -129,7 +129,7 @@
                                     {
                                         @foreach (var img in item.Anhs)
                                         {
-                                            <div class="col-3 ">
+                                            <div class="col-3">
                                                 <img width="100%" src="~/img/products/@img.TenAnh" style="border: 3px solid gray" />
                                             </div>
                                         }
@@ -149,4 +149,6 @@
         document.getElementById("txt_ID").value = id;
     }
 </script>
+
+
 <partial name="_Paging" model="pagingmodel" />
