@@ -218,11 +218,12 @@ namespace SweetCake.Controllers
 
                         }
                         _db.SaveChanges();
-                        TempData["Sucess"] = "Sửa sản phẩm thành công!!";
-                        return RedirectToAction("Index");
+                        
                     }
-                    
-                }
+					TempData["Sucess"] = "Sửa sản phẩm thành công!!";
+					return RedirectToAction("Index");
+
+				}
                 return View(obj);
             }
             catch (Exception)

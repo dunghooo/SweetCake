@@ -557,7 +557,7 @@ html[dir=rtl] .border-primary {
 }
 
 a {
-  color: #696cff;
+  color: black;
 }
 a:hover {
   color: #787bff;
@@ -650,19 +650,15 @@ a:hover {
 
 .bg-menu-theme {
   background-color: #fff !important;
-  color: #697a8d;
+  
 }
-.bg-menu-theme .menu-link,
-.bg-menu-theme .menu-horizontal-prev,
-.bg-menu-theme .menu-horizontal-next {
-  color: #697a8d;
-}
+
 .bg-menu-theme .menu-link:hover, .bg-menu-theme .menu-link:focus,
 .bg-menu-theme .menu-horizontal-prev:hover,
 .bg-menu-theme .menu-horizontal-prev:focus,
 .bg-menu-theme .menu-horizontal-next:hover,
 .bg-menu-theme .menu-horizontal-next:focus {
-  color: #696cff;
+  color: white;
 }
 .bg-menu-theme .menu-link.active,
 .bg-menu-theme .menu-horizontal-prev.active,
@@ -739,7 +735,7 @@ a:hover {
 html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item.open > .menu-link, .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item.open > .menu-link,
 html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover,
 .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover {
-  background-color: rgba(67, 89, 113, 0.04);
+  background-color: orange;
 }
 .bg-menu-theme .menu-inner .menu-sub > .menu-item.active > .menu-link.menu-toggle {
   background-color: rgba(67, 89, 113, 0.04);

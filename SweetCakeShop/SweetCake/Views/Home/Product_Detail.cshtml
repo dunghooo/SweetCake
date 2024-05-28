@@ -1,0 +1,145 @@
+﻿@model SanPham
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-section breadcrumb-bg" style="background-image: url('../../assets/img/banner_about.png')">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>THÔNG TIN SẢN PHẨM</p>
+					<h1>Sản phẩm chi tiết</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- single product -->
+<div class="single-product mt-150 mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+				
+					@foreach (var anh in Model?.Anhs)
+					{
+					<div class="single-product-img">
+						<img src="~/img/products/@anh.TenAnh" />
+						</div>
+					}
+					@* <img src="/assets/img/products/product-img-5.jpg" alt=""> *@
+				
+			</div>
+			<div class="col-md-7">
+				<div class="single-product-content">
+					<form method="post" asp-action="ThemVaoGioHang" asp-controller="GioHang" asp-route-sanPhamId="@Model.Id">
+						@{
+							var sum = 0;
+							foreach (var item in Model?.ChiTietSPs)
+							{
+								sum += item.SoLuong;
+							}
+						}
+						@if (sum == 0)
+						{
+							<h3 style="color:red">(Hết hàng)</h3>
+						}
+					<h3>@Model.Ten</h3>
+						@foreach (var ct_sp in Model.ChiTietSPs)
+						{
+							<p class="single-product-pricing"> @(ct_sp.Gia.ToString("#,0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")))đ</p>
+						}
+						
+					<p>@Model.Mota</p>
+					<div class="single-product-form">
+						
+							<input type="number" id="numberInput" name="quantity" placeholder="0" min="1">
+							<input  class="cart-btn" type="submit" value="Thêm vào giỏ hàng" >
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<!-- end single product -->
+<!-- more products -->
+<div class="more-products mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="section-title">
+					<h3><span class="orange-text">Sản phẩm</span> liên quan</h3>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			@if (ViewData["RelateProduct"] != null)
+			{
+				var relateProducts = ViewData["RelateProduct"] as List<SweetCake.Models.SanPham>;
+				foreach (var item in relateProducts)
+				{
+					var sumhr = 0;
+					foreach (var chiTiet in item.ChiTietSPs)
+					{
+						sumhr += chiTiet.SoLuong;
+					}
+				
+			<div class="col-lg-4 col-md-6 text-center">
+				<div class="single-product-item">
+					<div class="product-image">
+								<a asp-action="Product_Deatail" asp-controller="Home" asp-route-id_sp="@item.Id">
+									<img class="img-fluid" src="@Url.Action("GetImage", "Home", new { id_sp = @item.Id})">
+								</a>
+					</div>
+							@if (sumhr == 0)
+							{
+								<div class="out-of-stock d-flex justify-content-center align-items-center"><h4>Hết hàng</h4></div>
+							}
+					<h3>@item.Ten</h3>
+							<p class="product-price">
+								@(item.ChiTietSPs.Min(ct => ct.Gia).ToString("#,0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")))đ
+							</p>
+							@if (sumhr == 0)
+							{
+								<div class="text-danger">Hết hàng</div>
+							}
+							else
+							{
+								<a asp-action="ThemVaoGioHang" asp-controller="GioHang" asp-route-sanPhamId="@item.Id" asp-route-returnUrl="@Url.Action("Index", "Home")" class="cart-btn"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+							}
+							
+				</div>
+			</div>
+				}
+			}
+		</div>
+
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const numberInput = document.getElementById('numberInput');
+
+		numberInput.addEventListener('input', () => {
+			let currentValue = parseInt(numberInput.value, 10);
+			if (isNaN(currentValue) || currentValue < 1) {
+				numberInput.value = '';
+			}
+		});
+
+		numberInput.addEventListener('blur', () => {
+			if (numberInput.value === '') {
+				numberInput.value = '1';
+			}
+		});
+	});
+</script>
+<!-- end more products -->

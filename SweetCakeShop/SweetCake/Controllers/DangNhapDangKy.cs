@@ -16,6 +16,7 @@ namespace SweetCake.Controllers
         [HttpGet]
         public IActionResult Login(string? returnUrl)
         {
+
             if (returnUrl != null)
             {
                 ViewBag.returnUrl = returnUrl;
@@ -138,7 +139,7 @@ namespace SweetCake.Controllers
 		public IActionResult Logout()
 		{
 			HttpContext.Session.Clear();
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Login", "DangNhapDangKy");
 		}
 	}
 }

@@ -8,6 +8,7 @@ namespace SweetCake.Models
 	{
 		[Key]
 		public int Id { get; set; }
+		public int SoLuong { get; set; }
 		public int DonHangId { get; set; }
 		public DonHang DonHang { get; set; }
 		public int ChiTiet_SPId { get; set; }

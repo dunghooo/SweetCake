@@ -1,428 +1,379 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
-	<!-- title -->
-	<title>Fruitkha - Slider Version</title>
+    <!-- title -->
+    <title>SweetCake - Always care about your taste</title>
 
-	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
-	<!-- google font -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-	<!-- fontawesome -->
-	<link rel="stylesheet" href="/assets/css/all.min.css">
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-	<!-- owl carousel -->
-	<link rel="stylesheet" href="/assets/css/owl.carousel.css">
-	<!-- magnific popup -->
-	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
-	<!-- animate css -->
-	<link rel="stylesheet" href="/assets/css/animate.css">
-	<!-- mean menu css -->
-	<link rel="stylesheet" href="/assets/css/meanmenu.min.css">
-	<!-- main style -->
-	<link rel="stylesheet" href="/assets/css/main.css">
-	<!-- responsive -->
-	<link rel="stylesheet" href="/assets/css/responsive.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="/assets/img/logosweetcake.png">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/assets/css/owl.carousel.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <!-- mean menu css -->
+    <link rel="stylesheet" href="/assets/css/meanmenu.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="/assets/css/responsive.css">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<link rel="stylesheet" href="~//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-	<style>	
-		.user-menu {
-			position: relative;
-			display: inline-block;
-		}
+    <link rel="stylesheet" href="~//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-		.logout-dropdown {
-			display: none;
-			position: absolute;
-			background-color: transparent;
-			min-width: 100px;
-			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-			z-index: 1;
-			width: 150px;
-		}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-		.user-menu:hover .logout-dropdown {
-			display: block;
-		}
+    <link href="https://cdn.jsdelivr.net/npm/icomoon@1.0.0/style.min.css" rel="stylesheet">
+    <style>
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
 
-		.logout-dropdown a {
-			color: black;
-			padding: 12px 16px;
-			text-decoration: none;
-			display: block;
-		}
+        .logout-dropdown {
+            display: none;
+            position: absolute;
+            background-color: transparent;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            width: 150px;
+        }
 
-			
-	</style>
+        .user-menu:hover .logout-dropdown {
+            display: block;
+        }
+
+        .logout-dropdown a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+    </style>
 </head>
 <body>
-	<partial name="_notification" />
-	<!--PreLoader-->
-	<div class="loader">
-		<div class="loader-inner">
-			<div class="circle"></div>
-		</div>
-	</div>
-	<!--PreLoader Ends-->
-	<!-- header -->
-	<div class="top-header-area" id="sticker">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
-					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="/assets/img/logosweetcake.png" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-						<!-- menu start -->
-						<nav class="main-menu">
-							<ul>
-								<li class="current-list-item">
-									<a href="#">Trang chủ</a>
-								</li>
-								<li><a asp-action="About" asp-controller="Home">Về Chúng tôi</a></li>
-								
-								<li>
-									<a href="news.html">Tin tức</a>
-									<ul class="sub-menu">
-										<li><a href="news.html">News</a></li>
-										<li><a href="single-news.html">Single News</a></li>
-									</ul>
-								</li>
-								<li><a href="contact.html">Liên hệ</a></li>
-								<li>
-									<a href="shop.html">Cửa hàng</a>
-									<ul class="sub-menu">
-										<li><a href="shop.html">Shop</a></li>
-										<li><a href="checkout.html">Check Out</a></li>
-										<li><a href="single-product.html">Single Product</a></li>
-										<li><a href="cart.html">Cart</a></li>
-									</ul>
-								</li>
-								<li>
-									<div class="header-icons">
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-										<a class="shopping-cart" href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-										<div class="user-menu">
-											@if (ViewBag.Username != null)
-											{
-												<a class="shopping-cart" href="#">@ViewBag.Username</a>
-												<div class="logout-dropdown">
-													<a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Logout"> Đăng xuất</a>
-												</div>
-											}
-											else
-											{
-												<a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Login"><i class="fa-regular fa-user"></i></a>
-											}
-										</div>
-									</div>
-								</li>
-							</ul>
-						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
-						<!-- menu end -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end header -->
-	<!-- search area -->
-	<div class="search-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<span class="close-btn"><i class="fas fa-window-close"></i></span>
-					<div class="search-bar">
-						<div class="search-bar-tablecell">
-							<h3>Search For:</h3>
-							<input type="text" placeholder="Keywords">
-							<button type="submit">Search <i class="fas fa-search"></i></button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end search area -->
-	<!-- product section -->
-	@RenderBody();
-	@* <div class="product-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3><span class="orange-text">Our</span> Products</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
+    <partial name="_notification" />
+    <!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a asp-action="Index" asp-controller="Home">
+                                <img src="/assets/img/logosweetcake.png" alt="">
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+                                <li class="current-list-item">
+                                    <a asp-action="Index" asp-controller="Home">Trang chủ</a>
+                                </li>
+                                <li><a asp-action="About" asp-controller="Home">Về Chúng tôi</a></li>
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
-						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> *@
-	<!-- end product section -->
-	
-	<!-- end cart banner section -->
+                                <li>
+                                    <a href="news.html">Tin tức</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="news.html">News</a></li>
+                                        <li><a href="single-news.html">Single News</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Liên hệ</a></li>
+                                <li>
+                                    <a asp-action="Shop" asp-controller="Home">Cửa hàng</a>
 
-	<!-- advertisement section -->
-	<div class="abt-section mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-12">
-					<div class="abt-text">
-						<p class="top-sub">Ra đời vào năm 2000</p>
-						<h2>Chúng tôi là <span class="orange-text">SweetCake</span></h2>
-						<p>Sweet Cake không chỉ cung cấp đa dạng các loại bánh mà còn là nơi sản xuất nguyên liệu Fondant cao cấp bậc nhất. Sweet Cake luôn nỗ lực và sáng tạo không ngừng để mang đến sự hoàn hảo trong từng chiếc bánh.</p>
-						<p>Hãy trở thành chuyên gia trong việc tạo hình bánh fondant, đồng thời kết nối với những người có cùng đam mê tại Sweet Cake. Tham gia khoá đào tạo ngay nhé!</p>
-						<a href="about.html" class="boxed-btn mt-4">Xem thêm</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end advertisement section -->
-	<!-- shop banner -->
-	<section class="shop-banner">
-		<div class="container">
-			<h3>Mùa sale tháng 6 đã đến! <br> với nhiều <span class="orange-text">Ưu đãi...</span></h3>
-			<div class="sale-percent"><span>giảm! <br> Tới</span>50% <span></span></div>
-			<a href="shop.html" class="cart-btn btn-lg">Mua Ngay</a>
-		</div>
-	</section>
-	<!-- end shop banner -->
-	<!-- latest news -->
-	<div class="latest-news pt-150 pb-150">
-		<div class="container">
+                                </li>
+                                <li>
+                                    <div class="header-icons">
+                                        <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                        <a class="shopping-cart" asp-action="Index" asp-controller="GioHang"><i class="fas fa-shopping-cart"></i></a>
+                                        <div class="user-menu">
+                                            @if (ViewBag.Username != null)
+                                            {
+                                                <a class="shopping-cart" href="#">@ViewBag.Username</a>
+                                                <div class="logout-dropdown">
+                                                    <a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Logout"> Đăng xuất</a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Login"><i class="fa-regular fa-user"></i></a>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                        <div class="mobile-menu"></div>
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+    <!-- search area -->
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3>Search For:</h3>
+                            <input type="text" placeholder="Keywords">
+                            <button type="submit">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search area -->
+    <!-- product section -->
+    @RenderBody()
+    
+    <div class="abt-section mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="abt-bg">
+                        <a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="abt-text">
+                        <p class="top-sub">Ra đời vào năm 2000</p>
+                        <h2>Chúng tôi là <span class="orange-text">SweetCake</span></h2>
+                        <p>Sweet Cake không chỉ cung cấp đa dạng các loại bánh mà còn là nơi sản xuất nguyên liệu Fondant cao cấp bậc nhất. Sweet Cake luôn nỗ lực và sáng tạo không ngừng để mang đến sự hoàn hảo trong từng chiếc bánh.</p>
+                        <p>Hãy trở thành chuyên gia trong việc tạo hình bánh fondant, đồng thời kết nối với những người có cùng đam mê tại Sweet Cake. Tham gia khoá đào tạo ngay nhé!</p>
+                        <a href="about.html" class="boxed-btn mt-4">Xem thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <!-- end advertisement section -->
+    <!-- shop banner -->
+    <section class="shop-banner">
+        <div class="container">
+            <h3>Mùa sale tháng 6 đã đến! <br> với nhiều <span class="orange-text">Ưu đãi...</span></h3>
+            <div class="sale-percent"><span>giảm! <br> Tới</span>50% <span></span></div>
+            <a href="shop.html" class="cart-btn btn-lg">Mua Ngay</a>
+        </div>
+    </section>
+    <!-- end shop banner -->
+    <!-- latest news -->
+    <div class="latest-news pt-150 pb-150">
+        <div class="container">
 
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3><span class="orange-text">Tin tức</span> của chúng tôi</h3>
-						
-					</div>
-				</div>
-			</div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="section-title">
+                        <h3><span class="orange-text">Tin tức</span> của chúng tôi</h3>
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">SO SÁNH BÁNH FONTDANT VÀ BÁNH KEM: ƯU VÀ NHƯỢC ĐIỂM CỦA TỪNG LOẠI</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 15 tháng 5, 2024</span>
-							</p>
-							<p class="excerpt">Bánh Fondant và “hành trình” chinh phục thế giới bánh ngọt bằng câu chuyện ngọt ngào cùng tạo hình bắt mắt, thu hút mọi ánh nhìn.</p>
-							<a href="single-news.html" class="read-more-btn">Đọc thêm <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">BÁNH FONDANT ĐÃ CHINH PHỤC THẾ GIỚI BÁNH NGỌT NHƯ THẾ NÀO?</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 15 tháng 5, 2024</span>
-							</p>
-							<p class="excerpt">Bánh Fondant và “hành trình” chinh phục thế giới bánh ngọt bằng câu chuyện ngọt ngào cùng tạo hình bắt mắt, thu hút mọi ánh nhìn.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">PHÂN BIỆT 2 LOẠI MÀU BÁNH THƯỜNG DÙNG NHẤT</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 15 tháng 5, 2024</span>
-							</p>
-							<p class="excerpt">Khi bạn làm bánh và cần sử dụng màu thực phẩm, có một số quy tắc quan trọng bạn nên tuân theo để đảm bảo rằng màu sẽ đạt được kết quả tốt nhất.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<a href="news.html" class="boxed-btn">Thêm nhiều tin tức</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end latest news -->
-	<!-- logo carousel -->
-	<div class="logo-carousel-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="logo-carousel-inner">
-						<div class="single-logo-item">
-							<img src="/assets/img/company-logos/1.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="/assets/img/company-logos/2.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="/assets/img/company-logos/3.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="/assets/img/company-logos/4.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="/assets/img/company-logos/5.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end logo carousel -->
-	<!-- footer -->
-	<div class="footer-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box about-widget">
-						<h2 class="widget-title">Về chúng tôi</h2>
-						<p>The Cake Factory không chỉ cung cấp đa dạng các loại bánh mà còn là nơi sản xuất nguyên liệu Fondant cao cấp bậc nhất. The Cake Factory luôn nỗ lực và sáng tạo không ngừng để mang đến sự hoàn hảo trong từng chiếc bánh.</p>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box get-in-touch">
-						<h2 class="widget-title">Thông tin liên lạc</h2>
-						<ul>
-							<li>7a/3 Nguyễn Gia Thiều, TP.Buôn Ma Thuột, Tỉnh Đắk Lắk</li>
-							<li>dungho2209@gmail.com</li>
-							<li>+84 368 515 813</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box pages">
-						<h2 class="widget-title">Trang</h2>
-						<ul>
-							<li><a href="index.html">Trang chủ</a></li>
-							<li><a href="about.html">Về chúng tôi</a></li>
-							<li><a href="services.html">Cửa hàng</a></li>
-							<li><a href="news.html">Tin tức</a></li>
-							<li><a href="contact.html">Liên hệ</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="footer-box subscribe">
-						<h2 class="widget-title">Đăng kí</h2>
-						<p>Đăng ký vào danh sách gửi thư của chúng tôi để nhận được những cập nhật mới nhất.</p>
-						<form action="index.html">
-							<input type="email" placeholder="Email">
-							<button type="submit"><i class="fas fa-paper-plane"></i></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end footer -->
-	<!-- copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<p>
-						Copyrights &copy; 2024 - <a href="https://github.com/dunghooo">Dũng Hồ</a><br>
-					</p>
-				</div>
-				<div class="col-lg-6 text-right col-md-12">
-					<div class="social-icons">
-						<ul>
-							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end copyright -->
-	<!-- jquery -->
-	<script src="/assets/js/jquery-1.11.3.min.js"></script>
-	<!-- bootstrap -->
-	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-	<!-- count down -->
-	<script src="/assets/js/jquery.countdown.js"></script>
-	<!-- isotope -->
-	<script src="/assets/js/jquery.isotope-3.0.6.min.js"></script>
-	<!-- waypoints -->
-	<script src="/assets/js/waypoints.js"></script>
-	<!-- owl carousel -->
-	<script src="/assets/js/owl.carousel.min.js"></script>
-	<!-- magnific popup -->
-	<script src="/assets/js/jquery.magnific-popup.min.js"></script>
-	<!-- mean menu -->
-	<script src="/assets/js/jquery.meanmenu.min.js"></script>
-	<!-- sticker js -->
-	<script src="/assets/js/sticker.js"></script>
-	<!-- main js -->
-	<script src="/assets/js/main.js"></script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-latest-news">
+                        <a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
+                        <div class="news-text-box">
+                            <h3><a href="single-news.html">SO SÁNH BÁNH FONTDANT VÀ BÁNH KEM: ƯU VÀ NHƯỢC ĐIỂM CỦA TỪNG LOẠI</a></h3>
+                            <p class="blog-meta">
+                                <span class="author"><i class="fas fa-user"></i> Admin</span>
+                                <span class="date"><i class="fas fa-calendar"></i> 15 tháng 5, 2024</span>
+                            </p>
+                            <p class="excerpt">Bánh Fondant và “hành trình” chinh phục thế giới bánh ngọt bằng câu chuyện ngọt ngào cùng tạo hình bắt mắt, thu hút mọi ánh nhìn.</p>
+                            <a href="single-news.html" class="read-more-btn">Đọc thêm <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-latest-news">
+                        <a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
+                        <div class="news-text-box">
+                            <h3><a href="single-news.html">BÁNH FONDANT ĐÃ CHINH PHỤC THẾ GIỚI BÁNH NGỌT NHƯ THẾ NÀO?</a></h3>
+                            <p class="blog-meta">
+                                <span class="author"><i class="fas fa-user"></i> Admin</span>
+                                <span class="date"><i class="fas fa-calendar"></i> 15 tháng 5, 2024</span>
+                            </p>
+                            <p class="excerpt">Bánh Fondant và “hành trình” chinh phục thế giới bánh ngọt bằng câu chuyện ngọt ngào cùng tạo hình bắt mắt, thu hút mọi ánh nhìn.</p>
+                            <a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+                    <div class="single-latest-news">
+                        <a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
+                        <div class="news-text-box">
+                            <h3><a href="single-news.html">PHÂN BIỆT 2 LOẠI MÀU BÁNH THƯỜNG DÙNG NHẤT</a></h3>
+                            <p class="blog-meta">
+                                <span class="author"><i class="fas fa-user"></i> Admin</span>
+                                <span class="date"><i class="fas fa-calendar"></i> 15 tháng 5, 2024</span>
+                            </p>
+                            <p class="excerpt">Khi bạn làm bánh và cần sử dụng màu thực phẩm, có một số quy tắc quan trọng bạn nên tuân theo để đảm bảo rằng màu sẽ đạt được kết quả tốt nhất.</p>
+                            <a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="news.html" class="boxed-btn">Thêm nhiều tin tức</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end latest news -->
+    <!-- logo carousel -->
+    <div class="logo-carousel-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="logo-carousel-inner">
+                        <div class="single-logo-item">
+                            <img src="/assets/img/company-logos/1.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="/assets/img/company-logos/2.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="/assets/img/company-logos/3.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="/assets/img/company-logos/4.png" alt="">
+                        </div>
+                        <div class="single-logo-item">
+                            <img src="/assets/img/company-logos/5.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end logo carousel -->
+    <!-- footer -->
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box about-widget">
+                        <h2 class="widget-title">Về chúng tôi</h2>
+                        <p>The Cake Factory không chỉ cung cấp đa dạng các loại bánh mà còn là nơi sản xuất nguyên liệu Fondant cao cấp bậc nhất. The Cake Factory luôn nỗ lực và sáng tạo không ngừng để mang đến sự hoàn hảo trong từng chiếc bánh.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box get-in-touch">
+                        <h2 class="widget-title">Thông tin liên lạc</h2>
+                        <ul>
+                            <li>7a/3 Nguyễn Gia Thiều, TP.Buôn Ma Thuột, Tỉnh Đắk Lắk</li>
+                            <li>dungho2209@gmail.com</li>
+                            <li>+84 368 515 813</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box pages">
+                        <h2 class="widget-title">Trang</h2>
+                        <ul>
+                            <li><a href="index.html">Trang chủ</a></li>
+                            <li><a href="about.html">Về chúng tôi</a></li>
+                            <li><a href="services.html">Cửa hàng</a></li>
+                            <li><a href="news.html">Tin tức</a></li>
+                            <li><a href="contact.html">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box subscribe">
+                        <h2 class="widget-title">Đăng kí</h2>
+                        <p>Đăng ký vào danh sách gửi thư của chúng tôi để nhận được những cập nhật mới nhất.</p>
+                        <form action="index.html">
+                            <input type="email" placeholder="Email">
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end footer -->
+    <!-- copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <p>
+                        Copyrights &copy; 2024 - <a href="https://github.com/dunghooo">Dũng Hồ</a><br>
+                    </p>
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end copyright -->
+    <!-- jquery -->
+    <script src="/assets/js/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap -->
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- count down -->
+    <script src="/assets/js/jquery.countdown.js"></script>
+    <!-- isotope -->
+    <script src="/assets/js/jquery.isotope-3.0.6.min.js"></script>
+    <!-- waypoints -->
+    <script src="/assets/js/waypoints.js"></script>
+    <!-- owl carousel -->
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <!-- magnific popup -->
+    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- mean menu -->
+    <script src="/assets/js/jquery.meanmenu.min.js"></script>
+    <!-- sticker js -->
+    <script src="/assets/js/sticker.js"></script>
+    <!-- main js -->
+    <script src="/assets/js/main.js"></script>
 
 </body>
 </html>
