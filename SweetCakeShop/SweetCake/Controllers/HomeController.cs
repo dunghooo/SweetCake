@@ -14,7 +14,7 @@ namespace SweetCake.Controllers
 		{
 			_db = db;
 		}
-		public const int ITEM_PER_PAGE = 12;
+		public const int ITEM_PER_PAGE = 6;
 
 		[BindProperty(SupportsGet = true, Name = "p")]
 		public int currentpage { get; set; }
@@ -152,5 +152,9 @@ namespace SweetCake.Controllers
 			}
 		}
 
+		public IActionResult CheckOut()
+		{
+			return View();
+		}
 	}
 }

@@ -10,11 +10,13 @@ namespace SweetCake.Models
 		[Key]
 		public int Id { get; set; }
 		public DateTime? ThoiGianTao { get; set; } = DateTime.Now;
-        public DateTime? ThoiGianHuy { get; set; }
-        public bool? TrangThaiThanhToan { get; set; } = false;
+		public DateTime? ThoiGianHuy { get; set; }
+		public bool? TrangThaiThanhToan { get; set; } = false;
 		public string? TrangThaiDonHang { get; set; } = "cho duyet";
 		public int TaiKhoanId { get; set; }
 		public TaiKhoan TaiKhoan { get; set; }
+		public ICollection<DonHang_ChiTiet>? DonHang_ChiTiets { get; set; }
+		public string PaymentMethod { get; set; }
 		[NotMapped]
 		public ThongTin_NhanHang? ThongTin_NhanHang { get; set; }
 	}

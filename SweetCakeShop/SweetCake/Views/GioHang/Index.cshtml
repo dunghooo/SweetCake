@@ -16,6 +16,70 @@
 		.bi-x-square-fill:hover {
 			color: red; /* Màu icon khi hover */
 		}
+
+	.btn-buttom {
+		background-color: #F28123; /* Blue background color */
+		color: #fff; /* White text color */
+		border: none; /* Remove border */
+		border-radius: 50px; /* Rounded corners */
+		padding: 12px 24px; /* Padding for size */
+		font-size: 11px; /* Font size */
+		font-weight: bold; /* Bold text */
+		text-transform: uppercase; /* Uppercase text */
+		cursor: pointer; /* Pointer cursor on hover */
+		transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+		display: inline-block; /* Inline-block display */
+		text-align: center; /* Center text */
+		margin: 10px 0; /* Margin for spacing */
+	}
+
+		.btn-buttom:hover {
+			background-color: #0056b3; /* Darker blue on hover */
+			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+		}
+
+	.billing-address-form .form-group {
+		margin-bottom: 16px; /* Space between form groups */
+	}
+
+	.billing-address-form p {
+		margin: 0; /* Remove default margin */
+	}
+
+	.billing-address-form input[type="text"],
+	.billing-address-form input[type="number"] {
+		width: 100%; /* Full width input */
+		padding: 12px 15px; /* Padding inside the input */
+		margin-top: 8px; /* Space above the input */
+		border: 1px solid #ced4da; /* Light grey border */
+		border-radius: 4px; /* Rounded corners */
+		font-size: 16px; /* Font size */
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+		transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+	}
+
+		.billing-address-form input[type="text"]:focus,
+		.billing-address-form input[type="number"]:focus {
+			border-color: #007bff; /* Blue border on focus */
+			box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Blue shadow on focus */
+			outline: none; /* Remove default focus outline */
+		}
+
+	.billing-address-form .text-danger {
+		color: #dc3545; /* Red color for error messages */
+		font-size: 14px; /* Slightly smaller font size */
+		margin-top: 4px; /* Space above the error message */
+		display: block; /* Block display to ensure proper spacing */
+	}
+
+	.card-body {
+		padding: 20px;
+		background-color: #f8f9fa; /* Light grey background for the card body */
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	
 </style>
 
 <div class="breadcrumb-section breadcrumb-bg" style="background-image: url('../../assets/img/banner_about.png')">
@@ -96,6 +160,7 @@
 		
 	</div>
 </div>
+<form id="paymentForm" asp-action="AddToDonHang" asp-controller="GioHang">
 <div class="checkout-section mt-150 mb-150">
 	<div class="container">
 		<div class="row">
@@ -114,7 +179,7 @@
 							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 								<div class="card-body">
 									<div class="billing-address-form">
-										<form asp-action="AddToDonHang" asp-controller="GioHang">
+										
 											<div class="form-group">
 												<p><input name="GhiChu" type="text" placeholder="Nhập ghi chú"></p>
 											</div>
@@ -123,22 +188,24 @@
 												<span class="text-danger">@ViewBag.errHoTen</span>
 											</div>
 											<div class="form-group">
-											<p><input name="SDT" type="email" placeholder="Nhập số điện thoại của bạn"></p>
+											<p><input name="SDT" type="number" placeholder="Nhập số điện thoại của bạn"></p>
 												<span class="text-danger">@ViewBag.errSDT</span>
 											</div>
 											<div class="form-group">
 											<p><input name="DiaChi" type="text" placeholder="Nhập địa chỉ của bạn"></p>
 												<span class="text-danger">@ViewBag.errDiaChi</span>
 											</div>
-										</form>
+										
 									</div>
 								</div>
+									
 							</div>
 						</div>
 					</div>
 
 				</div>
 			</div>
+			
 			<div class="col-lg-4">
 				<div class="total-section">
 					<table class="total-table">
@@ -163,18 +230,28 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="cart-buttons text-center">
-						<a href="cart.html" class="boxed-btn">SHIP/COD</a>
-						<a href="checkout.html" class="boxed-btn black">VNPAY</a>
-					</div>
+					
 				</div>
-
-
+					
+					<div class="cart-buttons text-center">
+						<input type="hidden" name="PaymentMethod" id="PaymentMethod" value="COD">
+						<button type="button" class="btn-buttom" onclick="submitForm('COD')">SHIP/COD</button>
+						<button type="button" class="btn-buttom" onclick="submitForm('VNPAY')">VNPAY</button>
+					</div>
 			</div>
+			
 		</div>
 	</div>
+	
 </div>
+</form>
 <!-- end check out section -->
 <!-- end cart -->
 <script src="/assets/js/GioHang/GioHang.js"></script>
 
+<script>
+	function submitForm(paymentMethod) {
+		document.getElementById('PaymentMethod').value = paymentMethod;
+		document.getElementById('paymentForm').submit();
+	}
+</script>

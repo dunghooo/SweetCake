@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SweetCake.Data;
 using Microsoft.Extensions.DependencyInjection;
+using SweetCake.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddSingleton<IVnPayService, VnPayService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();

@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SweetCake.Data;
+using SweetCake.Helpers;
 using SweetCake.Models;
+using SweetCake.Services;
+using SweetCake.ViewModel;
 using System.Text.RegularExpressions;
 
 namespace SweetCake.Controllers
@@ -11,10 +14,12 @@ namespace SweetCake.Controllers
 	{
 
 		private readonly ApplicationDbContext _context;
+		private readonly IVnPayService _vnPayService;
 
-		public GioHangController(ApplicationDbContext context)
+		public GioHangController(ApplicationDbContext context, IVnPayService vnPayService)
 		{
 			_context = context;
+			_vnPayService = vnPayService;
 		}
 
 		public const int ITEM_PER_PAGE = 10;
@@ -151,7 +156,7 @@ namespace SweetCake.Controllers
 			return RedirectToAction(nameof(Index), GioHang);
 		}
 
-		public IActionResult AddToDonHang(string HoTen, string SDT, string DiaChi, string GhiChu, TaiKhoan tk, string now)
+		public IActionResult AddToDonHang(string HoTen, string SDT, string DiaChi, string GhiChu, TaiKhoan tk, string paymentMethod = "COD")
 		{
 			ViewBag.HoTen = HoTen;
 			TempData["HoTen"] = ViewBag.HoTen;
@@ -215,6 +220,7 @@ namespace SweetCake.Controllers
 				{
 					var donHang = new DonHang();
 					donHang.TaiKhoanId = User.Id;
+					donHang.PaymentMethod = paymentMethod;
 					_context.Add(donHang);
 					_context.SaveChanges();
 
@@ -242,12 +248,85 @@ namespace SweetCake.Controllers
 					TT_NH.GhiChu = GhiChu;
 					_context.Add(TT_NH);
 					_context.SaveChanges();
+                    HttpContext.Session.Remove("giohang");
+                    if (paymentMethod == PaymentType.COD)
+					{
+						TempData["Sucess"] = "Thanh toán thành công!!"; 
+					}
 
-					HttpContext.Session.Remove("giohang");
+					else if(paymentMethod == PaymentType.VNPAY)
+					{
+						var vnPayModel = new VnPaymentRequestModel
+						{
+							Amount = tinhTong(donHang.Id),
+							CreatedDate = DateTime.Now,
+							Description = $"{tk.DiaChi}{tk.SDT}",
+							OrderId = new Random().Next(1000, 10000),
+							ProductId = donHang.Id
+						};
+						return Redirect(_vnPayService.CreatePaymentUrl(HttpContext, vnPayModel));
+					}
 					
 				}
 			}
 			return RedirectToAction("Index", "Home");
+		}
+
+		public IActionResult PaymentUser(int Id)
+		{
+			var User = HttpContext.Session.GetJson<TaiKhoan>("User");
+
+
+			var vnPayModel = new VnPaymentRequestModel
+			{
+				Amount = tinhTong(Id),
+				CreatedDate = DateTime.Now,
+				Description = $"{User.DiaChi}{User.SDT}",
+				OrderId = new Random().Next(1000, 10000),
+				ProductId = Id
+			};
+			return Redirect(_vnPayService.CreatePaymentUrl(HttpContext, vnPayModel));
+		}
+
+		public int tinhTong(int? Id)
+		{
+			int tong = 0;
+
+			int phiship = 25000;
+			var sp = _context.DonHang.Include(x => x.DonHang_ChiTiets)
+				.ThenInclude(y => y.ChiTiet_SP)
+				.FirstOrDefault(x => x.Id == Id);
+			if (sp != null)
+			{
+				foreach (var x in sp.DonHang_ChiTiets)
+				{
+					int tamtinh = 0;
+					tamtinh = x.SoLuong * x.ChiTiet_SP.Gia;
+					tong += tamtinh;
+				}
+				tong = tong + phiship;
+			}
+			return (tong);
+
+		}
+		public IActionResult PaymentCallBack()
+		{
+			var response = _vnPayService.PaymentExecute(Request.Query);
+			if (response == null || response.VnPayResponseCode != "00")
+			{
+				TempData["Error"] = $"Lỗi thanh toán VN Pay: {response.VnPayResponseCode}";
+				return RedirectToAction("Index", "GioHang");
+			}
+			var ID = int.Parse(response.OrderId);
+			var sp = _context.DonHang.FirstOrDefault(x => x.Id == ID);
+			if (sp != null)
+			{
+				sp.TrangThaiThanhToan = true;
+				_context.SaveChanges();
+			}
+			TempData["Sucess"] = $"Thanh toán VN Pay thành công";
+			return RedirectToAction("Index", "GioHang");
+
 		}
 	}
 }

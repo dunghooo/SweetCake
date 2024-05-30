@@ -12,5 +12,6 @@ namespace SweetCake.Data
 		public DbSet<SweetCake.Models.LoaiSP> LoaiSP { get; set; } = default!;
         public DbSet<SweetCake.Models.ChiTiet_SP> ChiTiet_SP { get; set; } = default!;
         public DbSet<SweetCake.Models.Anh> Anh { get; set; } = default!;
+		public DbSet<SweetCake.Models.ThongTin_NhanHang> ThongTin_NhanHang { get; set; } = default!;
 	}
 }
