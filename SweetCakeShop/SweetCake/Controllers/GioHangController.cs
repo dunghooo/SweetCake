@@ -69,7 +69,9 @@ namespace SweetCake.Controllers
 					GioHang.AddItem(chiTietSP, 1);
 				}
 				HttpContext.Session.SetJson("giohang", GioHang);
-			}
+
+                ViewBag.CartItemCount = GioHang.GetTotalItemCount();
+            }
 
 			if (string.IsNullOrEmpty(returnUrl))
 			{
@@ -327,6 +329,12 @@ namespace SweetCake.Controllers
 			TempData["Sucess"] = $"Thanh toán VN Pay thành công";
 			return RedirectToAction("Index", "GioHang");
 
+		}
+
+		public IActionResult LichSuGiaoDich()
+		{
+
+			return View();
 		}
 	}
 }

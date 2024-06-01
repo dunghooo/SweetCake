@@ -22,5 +22,7 @@ namespace SweetCake.Models
         public LoaiSP? LoaiSP { get; set; }
         public ICollection<ChiTiet_SP>? ChiTietSPs { get; set; }
         public ICollection<Anh>? Anhs { get; set; }
+
+        
     }
 }

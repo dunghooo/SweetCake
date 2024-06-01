@@ -18,8 +18,13 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddSingleton<IVnPayService, VnPayService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    /*options.UseLazyLoadingProxies();*/
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
 var app = builder.Build();
+
 
 
 

@@ -65,6 +65,8 @@
             display: block;
         }
 
+        
+
     </style>
 </head>
 <body>
@@ -119,7 +121,9 @@
                                                 <a class="shopping-cart" href="#">@ViewBag.Username</a>
                                                 <div class="logout-dropdown">
                                                     <a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Logout"> Đăng xuất</a>
+                                                    <a class="shopping-cart" asp-controller="DangNhapDangKy" asp-action="Logout"> Bánh đã mua</a>
                                                 </div>
+                                                
                                             }
                                             else
                                             {
@@ -375,5 +379,18 @@
     <!-- main js -->
     <script src="/assets/js/main.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.cart-btn').click(function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.post(url, function (data) {
+                    if (data.itemCount != null) {
+                        $('.cart-count').text(data.itemCount);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

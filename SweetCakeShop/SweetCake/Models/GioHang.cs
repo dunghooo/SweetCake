@@ -21,7 +21,12 @@
 		public int TamTinh() => (int)Lines.Sum(p => p.ChiTiet_SP.Gia * p.SoLuong);
 		public int TongTien() => (int)(TamTinh() + 25000);
 		public void Clear() => Lines.Clear();
-	}
+
+        public int GetTotalItemCount()
+        {
+            return Lines.Sum(x => x.SoLuong);
+        }
+    }
 
 	public class Giohang_Line
 	{
