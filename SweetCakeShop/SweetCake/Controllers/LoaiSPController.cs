@@ -4,7 +4,7 @@ using SweetCake.Models;
 
 namespace SweetCake.Controllers
 {
-    public class LoaiSPController : Controller
+	public class LoaiSPController : Controller
     {
 
         private readonly ApplicationDbContext _context;

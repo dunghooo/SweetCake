@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SweetCake.Data;
@@ -8,7 +7,7 @@ using System.Text;
 
 namespace SweetCake.Controllers
 {
-    public class SanPhamController : Controller
+	public class SanPhamController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webhost;
@@ -299,7 +298,7 @@ namespace SweetCake.Controllers
                 ViewBag.Search = Key;
                 if(total > 0)
                 {
-                    var result = _db.SanPham.Include(x => x.Anhs).Where(x => (x.TrangThai == "Đang bán" || x.TrangThai == "Mới") && (x.Id.ToString() == Key || x.Ten.Contains(Key))).Skip((currentpage - 1) * ITEM_PER_PAGE).Take(ITEM_PER_PAGE).ToList();
+                    var result = _db.SanPham.Include(x => x.Anhs).Where(x => (x.TrangThai == "Đang bán" || x.TrangThai == "Sale ") && (x.Id.ToString() == Key || x.Ten.Contains(Key))).Skip((currentpage - 1) * ITEM_PER_PAGE).Take(ITEM_PER_PAGE).ToList();
                     return View("Index", result);
                 }
                 else

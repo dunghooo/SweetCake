@@ -4,7 +4,7 @@ using SweetCake.ViewModel;
 
 namespace SweetCake.Services
 {
-    public class VnPayService : IVnPayService
+	public class VnPayService : IVnPayService
     {
         private readonly IConfiguration _config;
         public VnPayService(IConfiguration config) {
@@ -23,12 +23,13 @@ namespace SweetCake.Services
             vnpay.AddRequestData("vnp_CurrCode", _config["VnPay:CurrCode"]);
             vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress(context));
             vnpay.AddRequestData("vnp_Locale", _config["VnPay:Locale"]);
-
             vnpay.AddRequestData("vnp_OrderInfo", "Thanh toán cho đơn hàng:" + model.OrderId);
             vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
             vnpay.AddRequestData("vnp_ReturnUrl", _config["VnPay:PaymentBackReturnUrl"]);
             vnpay.AddRequestData("vnp_TxnRef", tick.ToString()); // Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
-            var paymentUrl = vnpay.CreateRequestUrl(_config["VnPay:BaseUrl"], _config["VnPay:HashSecret"]);
+			var expireDate = model.CreatedDate.AddHours(6); // Thiết lập thời gian hết hạn là 15 phút sau khi tạo
+			vnpay.AddRequestData("vnp_ExpireDate", expireDate.ToString("yyyyMMddHHmmss"));
+			var paymentUrl = vnpay.CreateRequestUrl(_config["VnPay:BaseUrl"], _config["VnPay:HashSecret"]);
             return paymentUrl;
         }
 

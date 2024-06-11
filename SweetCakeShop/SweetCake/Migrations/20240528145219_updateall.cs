@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SweetCake.Migrations
 {
-    /// <inheritdoc />
-    public partial class updateall : Migration
+	/// <inheritdoc />
+	public partial class updateall : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

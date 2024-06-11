@@ -1,12 +1,12 @@
 ﻿using System.Globalization;
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace SweetCake.Helper
 {
-    public class VnPayLibrary
+	public class VnPayLibrary
     {
         private readonly SortedList<string, string> _requestData = new SortedList<string, string>(new VnPayCompare());
         private readonly SortedList<string, string> _responseData = new SortedList<string, string>(new VnPayCompare());

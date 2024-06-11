@@ -4,8 +4,8 @@
 
 namespace SweetCake.Migrations
 {
-    /// <inheritdoc />
-    public partial class updatettnh : Migration
+	/// <inheritdoc />
+	public partial class updatettnh : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

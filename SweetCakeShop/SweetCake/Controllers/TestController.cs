@@ -3,7 +3,7 @@ using SweetCake.Data;
 
 namespace SweetCake.Controllers
 {
-    public class TestController : Controller
+	public class TestController : Controller
     {
         private readonly ApplicationDbContext _db;
 
@@ -14,7 +14,10 @@ namespace SweetCake.Controllers
         public IActionResult Index()
         {
             var s = _db.LoaiSP.ToList();
-            return View();
+            
+
+            return View(s);
+            
         }
     }
 }

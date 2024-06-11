@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SweetCake.Data;
-using SweetCake.Models;
-using System.Diagnostics;
 
 namespace SweetCake.Controllers
 {
-    public class HomeController : Controller
+	public class HomeController : Controller
     {
 		private readonly ApplicationDbContext _db;
 
@@ -21,6 +20,16 @@ namespace SweetCake.Controllers
 
 		public int countpages { get; set; }
 
+		[Route("Home/Error")]
+		public IActionResult Error(int statusCode)
+		{
+			if (statusCode == 404)
+			{
+				return View("NotFound");
+			}
+
+			return View("Error");
+		}
 
 		public IActionResult Index()
         {
@@ -156,5 +165,61 @@ namespace SweetCake.Controllers
 		{
 			return View();
 		}
-	}
+
+        public JsonResult Search()
+        {
+            var result = _db.SanPham
+                        .Where(x => x.TrangThai == "Đang bán" || x.TrangThai == "Sale")
+                        .Include(x => x.Anhs)
+                        .GroupBy(x => x.Id)
+                        .Select(group => group.First())
+                        .ToList();
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value);
+        }
+
+		public IActionResult ProductSearch(string key)
+		{
+            ViewBag.key = key;
+
+			var sptimkiem = _db.SanPham.Where(x => x.TrangThai == "Đang Bán" || x.TrangThai == "Sale").Include(x => x.Anhs).Include(x => x.ChiTietSPs).ToList();
+			if (sptimkiem.Count() > 6)
+			{
+				sptimkiem = sptimkiem.Take(6).ToList();
+			}
+            ViewData["RelateProduct"] = sptimkiem;
+
+            int total = _db.SanPham.Count(x => x.Ten.ToLower().Contains(key.ToLower()) && (x.TrangThai == "Sale" || x.TrangThai == "Đang Bán"));
+            countpages = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
+
+            if (currentpage < 1)
+            {
+                currentpage = 1;
+            }
+            if (currentpage > countpages)
+            {
+                currentpage = countpages;
+            }
+
+            ViewBag.CurrentPage = currentpage;
+            ViewBag.CountPages = countpages;
+            if (total > 0)
+            {
+                var result = _db.SanPham
+                            .Where(x => x.Ten.ToLower().Contains(key.ToLower()) && (x.TrangThai == "Sale" || x.TrangThai == "Đang Bán"))
+                            .Include(x => x.ChiTietSPs)
+                            .Include(x => x.Anhs)
+                            .Skip((currentpage - 1) * ITEM_PER_PAGE)
+                            .Take(ITEM_PER_PAGE)
+                            .ToList();
+                return View(result);
+            }
+			return View();
+        }
+
+    }
 }

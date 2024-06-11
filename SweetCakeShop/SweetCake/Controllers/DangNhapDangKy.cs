@@ -5,7 +5,7 @@ using SweetCake.Models;
 
 namespace SweetCake.Controllers
 {
-    public class DangNhapDangKy : Controller
+	public class DangNhapDangKy : Controller
     {
         private readonly ApplicationDbContext _db;
 

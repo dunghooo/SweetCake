@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Aram.Infrastructure
 {
-    public static class SessionExtensions
+	public static class SessionExtensions
 	{
 		public static void SetJson(this ISession session, string key, object value)
 		{

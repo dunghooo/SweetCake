@@ -1,6 +1,6 @@
 ﻿namespace SweetCake.Helpers
 {
-    public class PagingModel
+	public class PagingModel
     {
         public int currentpage { get; set; }
         public int countpages { get; set; }

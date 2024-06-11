@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SweetCake.Data;
-using Microsoft.Extensions.DependencyInjection;
 using SweetCake.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +18,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddSingleton<IVnPayService, VnPayService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    /*options.UseLazyLoadingProxies();*/
+    options.UseLazyLoadingProxies();
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
@@ -43,6 +42,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+
 
 app.MapControllerRoute(
     name: "default",

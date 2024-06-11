@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetCake.Models
 {
-    [Table("ANH")]
+	[Table("ANH")]
     public class Anh
     {
         [Key]
         public int Id { get; set; }
         public string TenAnh { get; set; }
         public int SanphamId { get; set; }
-        public SanPham SanPham { get; set; }
+        public virtual SanPham SanPham { get; set; }
     }
 }

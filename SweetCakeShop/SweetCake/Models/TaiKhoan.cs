@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using SweetCake.Models;
 
 namespace SweetCake.Models
 {
-    [Table("TAI_KHOAN")]
+	[Table("TAI_KHOAN")]
     public class TaiKhoan
     {
         public int Id { get; set; }
@@ -35,8 +34,8 @@ namespace SweetCake.Models
         public bool LoaiTK { get; set; }
         [Display(Name = "Trạng thái")]
         public bool TrangThai { get; set; }
-        [ForeignKey("ThongTin_NhanHang")]
+        
         [Display(Name = "Mã nhận hàng")]
-		public ICollection<DonHang>? DonHangs { get; set; }
+		public virtual ICollection<DonHang>? DonHangs { get; set; }
 	}
 }

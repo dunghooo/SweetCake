@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetCake.Models
 {
-    [Table("THONGTIN_NHANHANG")]
+	[Table("THONGTIN_NHANHANG")]
     public class ThongTin_NhanHang
     {
 		[Key]

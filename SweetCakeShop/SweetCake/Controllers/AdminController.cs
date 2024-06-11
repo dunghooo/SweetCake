@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SweetCake.Data;
 
 namespace SweetCake.Controllers
@@ -15,5 +16,17 @@ namespace SweetCake.Controllers
 		{
 			return View();
 		}
-	}
+
+        public IActionResult ThongKeDoanhThuTheoThang()
+        {
+            var data = _context.Set<ThongKeDoanhThu>().FromSqlInterpolated($"EXEC ThongKeDoanhThu").ToList();
+            return Json(data);
+        }
+        [HttpGet]
+        public IActionResult ThongKeDoanhThuTheoNgay()
+        {
+            var data = _context.Set<ThongKeDoanhThuTheoNgay>().FromSqlInterpolated($"EXEC ThongKeDoanhThuTheoNgay").ToList();
+            return Json(data);
+        }
+    }
 }

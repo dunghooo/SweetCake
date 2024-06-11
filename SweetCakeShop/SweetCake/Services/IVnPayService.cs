@@ -1,9 +1,8 @@
-﻿using SweetCake.Data;
-using SweetCake.ViewModel;
+﻿using SweetCake.ViewModel;
 
 namespace SweetCake.Services
 {
-    public interface IVnPayService
+	public interface IVnPayService
     {
         string CreatePaymentUrl (HttpContext context, VnPaymentRequestModel model);
         VnPaymentResponseModel PaymentExecute(IQueryCollection collections);

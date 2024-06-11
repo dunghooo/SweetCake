@@ -5,7 +5,7 @@ using SweetCake.Models;
 
 namespace SweetCake.Controllers
 {
-    public class ChiTietSPController : Controller
+	public class ChiTietSPController : Controller
     {
         private readonly ApplicationDbContext _context;
 

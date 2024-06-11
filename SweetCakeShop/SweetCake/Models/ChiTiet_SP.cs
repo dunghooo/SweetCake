@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetCake.Models
 {
-    [Table("CHI_TIET_SP")]
+	[Table("CHI_TIET_SP")]
     public class ChiTiet_SP
     {
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace SweetCake.Models
         [Required(ErrorMessage = "Hạn sử dụng không được để trống")]
         public DateTime HanSuDung { get; set; }
         public int SanPhamId { get; set; }
-        public SanPham? SanPham { get; set; }
+        public virtual SanPham? SanPham { get; set; }
         public bool TrangThai { get; set; } = true;
     }
 }

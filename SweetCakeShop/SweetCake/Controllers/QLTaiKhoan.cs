@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SweetCake.Data;
-using SweetCake.Helpers;
-using SweetCake.Models;
-using Aram.Infrastructure;
+﻿using Aram.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SweetCake.Data;
+using SweetCake.Models;
 
 namespace SweetCake.Controllers
 {
-    public class QLTaiKhoan : Controller
+	public class QLTaiKhoan : Controller
     {
         private readonly ApplicationDbContext _context;
         public QLTaiKhoan(ApplicationDbContext context)

@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetCake.Models
 {
-    [Table("LOAI_SP")]
+	[Table("LOAI_SP")]
     public class LoaiSP
     {
         [Key]
@@ -12,6 +12,6 @@ namespace SweetCake.Models
         [Column(TypeName = "NVARCHAR(50)")]
         public string Ten { get; set; }
         public bool TrangThai { get; set; }
-        public  ICollection<SanPham>? SanPhams { get; set; }
+        public virtual IEnumerable<SanPham>? SanPhams { get; set; }
     }
 }

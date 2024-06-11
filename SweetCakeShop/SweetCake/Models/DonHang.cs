@@ -1,5 +1,4 @@
-﻿using SweetCake.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SweetCake.Models
@@ -14,10 +13,10 @@ namespace SweetCake.Models
 		public bool? TrangThaiThanhToan { get; set; } = false;
 		public string? TrangThaiDonHang { get; set; } = "cho duyet";
 		public int TaiKhoanId { get; set; }
-		public TaiKhoan TaiKhoan { get; set; }
-		public ICollection<DonHang_ChiTiet>? DonHang_ChiTiets { get; set; }
+		public virtual TaiKhoan TaiKhoan { get; set; }
+		public virtual ICollection<DonHang_ChiTiet>? DonHang_ChiTiets { get; set; }
 		public string PaymentMethod { get; set; }
 		[NotMapped]
-		public ThongTin_NhanHang? ThongTin_NhanHang { get; set; }
+		public virtual ThongTin_NhanHang? ThongTin_NhanHang { get; set; }
 	}
 }
