@@ -1,1 +1,324 @@
-﻿
+﻿@model IEnumerable<DonHang>
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+    var pagingmodel = new SweetCake.Helpers.PagingModel()
+            {
+                currentpage = (int)(@ViewBag.CurrentPage),
+                countpages = (int)(@ViewBag.CountPages),
+                generateUrl = (int? p) => Url.Page("", new { p = p, Key = @ViewBag.Search })
+            };
+}
+<style>
+    .pay {
+        background-color: #03c046;
+        border: none;
+    }
+
+        .pay:hover {
+            background-color: #24a752;
+        }
+
+    .btn.btn-primary.cancel-order {
+        color: white;
+        background-color: #ff0b03;
+        border: none;
+    }
+
+        .btn.btn-primary.cancel-order:hover {
+            background-color: #e63731;
+        }
+
+    .btn.btn-primary {
+        background-color: none;
+    }
+
+    .link-chitiet{
+        color: blue;
+    }
+    .link-chitiet:hover{
+        color: orange;
+    }
+</style>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container mt-1">
+                <div class="cancel-dndk d-flex flex-row-reverse">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <!-- Tab panes -->
+                <div class="tab-content px-5 pb-3">
+                    <div class="container tab-pane active">
+                        <form name="frm_Delete" asp-controller="DonHang" asp-action="HuyDon" asp-route-returnUrl="@Url.Action("LichSuGiaoDich", "GioHang")" method="POST">
+                            <div class="mb-3">
+                                <input id="txt_ID" hidden type="text" name="txt_ID" />
+                            </div>
+                            <div class="mb-3 text-center">
+                                <h5>Bạn muốn huỷ đơn hàng này không?</h5>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <button type="submit" class="btn btn-primary" style="width:100px;">
+                                    Có
+                                </button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" style="width:100px;">
+                                    Không
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="breadcrumb-section breadcrumb-bg" style="background-image: url('../../assets/img/banner_about.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>LỊCH SỬ GIAO DỊCH</p>
+                    <h1>Thông tin giao dịch</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cart-section mt-150 mb-150">
+	<div class="container">
+		<div class="col-lg-12 col-md-12">
+			<div class="cart-table-wrap">
+				<table class="cart-table">
+					<thead class="cart-table-head" style="background-color: orange">
+						<tr class="table-head-row">
+							<th class="product-remove">ID</th>
+							<th class="product-image">Số lượng</th>
+							<th class="product-name">Đơn giá</th>
+							<th class="product-price">TT giao dịch</th>
+							<th class="product-quantity">TT Thanh toán</th>
+							<th class="product-total">Thao tác</th>
+                            <th>Chi tiết</th>
+						</tr>
+					</thead>
+					<tbody>
+                        @foreach(var item in Model)
+                        {
+                            <tr>
+                                @{
+                                    int tongGia = 0;
+                                    int phiShip = 25000;
+                                    int tongTien = 0;
+                                    int tongSoLuong = 0;
+                                }
+                                @foreach(var dh_ct in item.DonHang_ChiTiets)
+                                {
+                                    tongTien += dh_ct.SoLuong * dh_ct.ChiTiet_SP.Gia;
+                                    tongGia = tongTien + phiShip;
+                                    tongSoLuong += dh_ct.SoLuong;
+                                }
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @tongSoLuong
+                                </td>
+                                <td>
+                                    @tongGia
+                                </td>
+                                <td>
+                                    @if (item.TrangThaiDonHang == "cho duyet")
+                                    {
+                                        <span>Chờ duyệt</span>
+                                    }
+                                    else if (item.TrangThaiDonHang == "dang giao")
+                                    {
+                                        <span>Đang giao</span>
+                                    }
+                                    else if (item.TrangThaiDonHang == "da giao")
+                                    {
+                                        <span>Đã giao</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color: red">Đã huỷ</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.TrangThaiThanhToan == true)
+                                    {
+                                        <span style="color: green">Đã thanh toán</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color: red">Chưa thanh toán</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if(item.TrangThaiThanhToan == false)
+                                    {
+                                        if (item.TrangThaiDonHang == "cho duyet")
+                                        {
+                                            <a asp-action="PaymentUser" asp-route-Id="@item.Id" class="btn btn-danger pay">Thanh toán</a>
+                                            <a class="btn btn-primary cancel-order" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-id="@item.Id" onclick="setId(this)">Huỷ Đơn</a>
+                                        }
+                                    }
+                                    @if (item.TrangThaiDonHang == "da huy")
+                                    {
+                                        <span style="color: red">Đã hủy</span>
+                                    }
+                                    @if (item.TrangThaiDonHang == "da giao")
+                                    {
+                                        <span style="color: green">Đã giao</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="link-chitiet" data-bs-toggle="collapse" href="#@item.Id" role="button" aria-expanded="false"
+                                       aria-controls="@item.Id">Chi tiết</a>
+                                </td>
+                            </tr>
+                            <tr class="collapse" id="@item.Id">
+                                <td colspan="8" style="background-color: white">
+                                    <span class="text-start">Thời gian tạo đơn: @item.ThoiGianTao</span>
+                                    <p><strong>SẢN PHẨM ĐÃ ĐẶT</strong></p>
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Tên sản phẩm</th>
+                                                <th scope="col">Loại</th>
+                                                <th scope="col">Số lượng</th>
+                                                <th scope="col">Giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            @{
+                                                int stt = 0;
+                                            }
+                                            @foreach(var dh_ct in item.DonHang_ChiTiets)
+                                            {
+                                                stt += 1;
+
+                                                <tr>
+                                                    <th scope="row">@stt</th>
+                                                    <td>@dh_ct.ChiTiet_SP.SanPham.Ten</td>
+                                                    <td>@dh_ct.ChiTiet_SP.SanPham.LoaiSP.Ten</td>
+                                                    <td>@dh_ct.SoLuong</td>
+                                                    <td>@dh_ct.ChiTiet_SP.Gia</td>
+                                                </tr>
+                                            }
+                                            <tr>
+                                                <th scope="row" colspan="4">
+                                                    Tổng tiền:
+                                                </th>
+                                                <th>
+                                                    @tongTien
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Tên người nhận hàng: 
+                                                </div>
+                                                <div class="col-6">
+                                                    <strong>
+                                                        @item.ThongTin_NhanHang?.HoTen
+                                                    </strong>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Địa chỉ:
+                                                </div>
+                                                <div class="col-6">
+                                                    <strong>
+                                                        @item.ThongTin_NhanHang?.DiaChi
+                                                    </strong>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Số điện thoại:
+                                                </div>
+                                                <div class="col-6">
+                                                    <strong>
+                                                        @item.ThongTin_NhanHang?.SDT
+                                                    </strong>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Ghi chú:
+                                                </div>
+                                                <div class="col-6">
+                                                    <strong>
+                                                        @item.ThongTin_NhanHang?.GhiChu
+                                                    </strong>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <div class="col-6 text-end">
+                                                    tiền ship:
+                                                </div>
+                                                <div class="col-6 text-end pe-4">
+                                                    <strong>@phiShip</strong>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    Tổng tiền
+                                                </div>
+                                                <div class="col-6 text-end pe-4">
+
+                                                    <strong>@tongGia</strong>
+                                                </div>
+                                                <div class="col mt-3">
+                                                    @if (item.TrangThaiDonHang == "cho duyet" && item.TrangThaiThanhToan == false)
+                                                    {
+                                                        <a asp-action="PaymentUser" asp-route-Id="@item.Id" class="btn btn-danger pay">Thanh toán</a>
+                                                        <a class="btn btn-primary cancel-order" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-id="@item.Id" onclick="setId(this)">Huỷ Đơn</a>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+				</table>
+			</div>
+            <div class="row justify-content-center">
+                <partial name="_Paging" model="pagingmodel" />
+            </div>
+		</div>
+
+
+
+	</div>
+</div>
+<br />
+<br />
+<script>
+    function setId(element) {
+        var id = element.getAttribute("data-id");
+        document.getElementById("txt_ID").value = id;
+    }
+</script>

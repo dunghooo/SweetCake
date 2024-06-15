@@ -14,9 +14,8 @@ namespace SweetCake.Models
 		public string? TrangThaiDonHang { get; set; } = "cho duyet";
 		public int TaiKhoanId { get; set; }
 		public virtual TaiKhoan TaiKhoan { get; set; }
-		public virtual ICollection<DonHang_ChiTiet>? DonHang_ChiTiets { get; set; }
+		public ICollection<DonHang_ChiTiet>? DonHang_ChiTiets { get; set; }
 		public string PaymentMethod { get; set; }
-		[NotMapped]
-		public virtual ThongTin_NhanHang? ThongTin_NhanHang { get; set; }
+		public ThongTin_NhanHang? ThongTin_NhanHang { get; set; }
 	}
 }

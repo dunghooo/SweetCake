@@ -10,6 +10,6 @@ namespace SweetCake.Models
         public int Id { get; set; }
         public string TenAnh { get; set; }
         public int SanphamId { get; set; }
-        public virtual SanPham SanPham { get; set; }
+        public SanPham SanPham { get; set; }
     }
 }

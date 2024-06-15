@@ -333,8 +333,42 @@ namespace SweetCake.Controllers
 
 		public IActionResult LichSuGiaoDich()
 		{
+            if (HttpContext.Session.GetString("UserName") != null)
+            {
+                ViewBag.Username = HttpContext.Session.GetString("UserName");
+            }
+            var user = HttpContext.Session.GetJson<TaiKhoan>("User");
+            int total = _context.DonHang.Where(x => x.TaiKhoanId == user.Id).Count();
+            countpages = (int)Math.Ceiling((double)total / ITEM_PER_PAGE);
+            if (currentpage < 1)
+            {
+                currentpage = 1;
+            }
+            if (currentpage > countpages)
+            {
+                currentpage = countpages;
+            }
 
-			return View();
-		}
+            ViewBag.CurrentPage = currentpage;
+            ViewBag.CountPages = countpages;
+            if (total > 0)
+            {
+                var result = _context.DonHang
+                    .Include(x => x.TaiKhoan)
+                    .Include(x => x.ThongTin_NhanHang)
+                    .Include(x => x.DonHang_ChiTiets)
+                    .ThenInclude(x => x.ChiTiet_SP)
+                    .ThenInclude(x => x.SanPham)
+                    .ThenInclude(x => x.LoaiSP)
+                    .Where(x => x.TaiKhoanId == user.Id)
+                    .OrderByDescending(x => x.ThoiGianTao)
+                    .Skip((currentpage - 1) * ITEM_PER_PAGE).Take(ITEM_PER_PAGE).ToList();
+                return View(result);
+            }
+            else
+            {
+                return View(null);
+            }
+        }
 	}
 }

@@ -36,6 +36,6 @@ namespace SweetCake.Models
         public bool TrangThai { get; set; }
         
         [Display(Name = "Mã nhận hàng")]
-		public virtual ICollection<DonHang>? DonHangs { get; set; }
+		public ICollection<DonHang>? DonHangs { get; set; }
 	}
 }

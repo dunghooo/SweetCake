@@ -17,9 +17,9 @@ namespace SweetCake.Models
         [Column(TypeName = "nvarchar(50)")]
         public string TrangThai { get; set; } = "Đang bán";
         public int LoaiSPId { get; set; }
-        public virtual LoaiSP? LoaiSP { get; set; }
-        public virtual ICollection<ChiTiet_SP>? ChiTietSPs { get; set; }
-        public virtual ICollection<Anh>? Anhs { get; set; }
+        public LoaiSP? LoaiSP { get; set; }
+        public ICollection<ChiTiet_SP>? ChiTietSPs { get; set; }
+        public ICollection<Anh>? Anhs { get; set; }
 
         
     }

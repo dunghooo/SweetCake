@@ -21,7 +21,7 @@ namespace SweetCake.Models
         [Required(ErrorMessage = "Hạn sử dụng không được để trống")]
         public DateTime HanSuDung { get; set; }
         public int SanPhamId { get; set; }
-        public virtual SanPham? SanPham { get; set; }
+        public SanPham? SanPham { get; set; }
         public bool TrangThai { get; set; } = true;
     }
 }

@@ -12,6 +12,6 @@ namespace SweetCake.Models
 		public int DonHangId { get; set; }
 		public virtual DonHang DonHang { get; set; }
 		public int ChiTiet_SPId { get; set; }
-		public virtual ChiTiet_SP? ChiTiet_SP { get; set; }
+		public ChiTiet_SP? ChiTiet_SP { get; set; }
 	}
 }
